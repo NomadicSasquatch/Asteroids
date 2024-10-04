@@ -22,7 +22,7 @@ public class Ship {
         this.yCoordinate = yCoordinate / 2;
         this.angle = -90;
         this.speed = speed;
-        this.health = 1;
+        this.health = 5;
         healthbar = new HealthBar(this);
     }
     // public void drawDot(Graphics g) {

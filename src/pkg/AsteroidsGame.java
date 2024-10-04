@@ -31,23 +31,8 @@ public class AsteroidsGame extends JPanel implements ActionListener, KeyListener
         setFocusable(true);
         addKeyListener(this);
 
-        scoreLabel = new JLabel("Score: " + score);
-        scoreLabel.setFont(new Font("Serif", Font.PLAIN, 24));
-        scoreLabel.setForeground(Color.WHITE);
-        this.add(scoreLabel);
-
-        setLayout(null);
-        scoreLabel.setBounds(10, 3, 200, 40);
-        endMessageLabel = new JLabel("", SwingConstants.CENTER);
-        try {
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("C:\\Users\\deez nuts\\Downloads\\xinyi (1).ttf")).deriveFont(24f);
-            endMessageLabel.setFont(customFont);
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-        }
-        endMessageLabel.setForeground(Color.RED);
-        this.add(endMessageLabel);
-        endMessageLabel.setBounds(175, 100, 900, 300);
+        scoreLabel = setScoreLabel();
+        endMessageLabel = setEndMessageLabel();
     }
 
     public void startGame() {
@@ -200,5 +185,34 @@ public class AsteroidsGame extends JPanel implements ActionListener, KeyListener
         new Timer(3000, e -> {
             displayEndMessage();
         }).start();
+    }
+    
+    public JLabel setScoreLabel() {
+        scoreLabel = new JLabel("Score: " + score);
+
+        scoreLabel.setFont(new Font("Serif", Font.PLAIN, 24));
+        scoreLabel.setForeground(Color.WHITE);
+        this.add(scoreLabel);
+        setLayout(null);
+        scoreLabel.setBounds(10, 3, 200, 40);
+
+        return scoreLabel;
+    }
+
+    public JLabel setEndMessageLabel() {
+        endMessageLabel = new JLabel("", SwingConstants.CENTER);
+
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("C:\\Users\\deez nuts\\Downloads\\xinyi (1).ttf")).deriveFont(24f);
+            endMessageLabel.setFont(customFont);
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
+        
+        endMessageLabel.setForeground(Color.RED);
+        this.add(endMessageLabel);
+        endMessageLabel.setBounds(175, 100, 900, 300);
+
+        return endMessageLabel;
     }
 }

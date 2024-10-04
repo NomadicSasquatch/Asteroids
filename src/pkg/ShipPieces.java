@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.awt.*;
 
 public class ShipPieces {
-    ArrayList<ShipPiece> shipPieces;
+    private ArrayList<ShipPiece> shipPieces;
 
     public ShipPieces() {
         shipPieces = new ArrayList<>();
@@ -14,6 +14,12 @@ public class ShipPieces {
             ShipPiece shipPiece = shipPieces.get(i);
             shipPiece.moveShipPiece();
         }
+    }
+
+    public void splitPieces(Ship ship) {
+        shipPieces.add(new ShipPiece(ship.xCoordinate, ship.yCoordinate, ship.angle - 60));
+        shipPieces.add(new ShipPiece(ship.xCoordinate, ship.yCoordinate, ship.angle + 60));
+        shipPieces.add(new ShipPiece(ship.xCoordinate, ship.yCoordinate, ship.angle + 180));
     }
 
     public void drawShipPieces(Graphics g) {

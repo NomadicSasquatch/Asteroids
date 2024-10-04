@@ -4,12 +4,13 @@ import java.util.Random;
 
 import static pkg.Constants.*;
 
-public class ShipPiece {
-    public int x, y, speed = 3, angle;
-    public final int SHIP_WIDTH = 10, SHIP_HEIGHT = 20;
-    int displace = 0;
+public class ShipPiece extends Ship {
+    private int x, y, speed = 3, angle;
+    private final double FRICTION = 0.9999999999999999999999999999999999999999999999999999999999;
+    private int displace = 0;
 
     public ShipPiece(int x, int y, int angle) {
+        super(x, y, 0);
         this.x = x;
         this.y = y;
         this.angle = angle;
@@ -65,6 +66,7 @@ public class ShipPiece {
         x += speed * Math.cos(Math.toRadians(angle));
         y += speed * Math.sin(Math.toRadians(angle));
         angle += (random.nextDouble() * 2 * Math.PI) / 3;
+
         if(x <= 0) {
             x = -100;
         }
@@ -78,6 +80,6 @@ public class ShipPiece {
             y = HEIGHT + 100;
         }
 
-        if (speed > 0) speed *= 0.9999999999999999999999999999999999999999999999999999999999;
+        if (speed > 0) speed *= FRICTION;
     }
 }

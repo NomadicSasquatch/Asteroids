@@ -7,6 +7,7 @@ public class Constants {
     public static final int MAX_SPEED;
     public static final int ROTATION_SPEED;
     public static final int RANDOM_ASTEROID_INT_RANGE;
+    
     static {
         WIDTH = 1200;
         HEIGHT = 800;

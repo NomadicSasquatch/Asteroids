@@ -22,7 +22,7 @@ public class Ship {
         this.yCoordinate = yCoordinate / 2;
         this.angle = -90;
         this.speed = speed;
-        this.health = 5;
+        this.health = 1;
         healthbar = new HealthBar(this);
     }
     // public void drawDot(Graphics g) {
@@ -71,8 +71,12 @@ public class Ship {
         }
     }
 
+    public void loseHealth() {
+        this.health--;
+        healthbar.setHealth(health);
+    }
+
     public void triggerInvulnerability() {
-        healthbar.loseHealth();
         canHit = false;
         invulnerabilityTimer = new Timer(INVULNERABILITY_DURATION, new ActionListener() {
             @Override
@@ -90,8 +94,6 @@ public class Ship {
     }
 
     public void deathSplit() {
-        deathShipPieces.shipPieces.add(new ShipPiece(xCoordinate, yCoordinate, angle - 60));
-        deathShipPieces.shipPieces.add(new ShipPiece(xCoordinate, yCoordinate, angle + 60));
-        deathShipPieces.shipPieces.add(new ShipPiece(xCoordinate, yCoordinate, angle + 180));
+        deathShipPieces.splitPieces(this);
     }
 }

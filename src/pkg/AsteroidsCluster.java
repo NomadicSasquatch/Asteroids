@@ -97,7 +97,7 @@ public class AsteroidsCluster {
         for(int i = 0; i < asteroidsList.size(); i++) {
             Asteroids asteroid = asteroidsList.get(i);
             if(isShipCollision(ship, asteroid) == true && ship.canHit == true) {
-                ship.health--;
+                ship.loseHealth();
                 if(ship.isAlive() == true) {
                     ship.triggerInvulnerability();
                 }

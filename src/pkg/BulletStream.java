@@ -3,8 +3,12 @@ import java.util.ArrayList;
 import java.awt.Graphics;
 
 public class BulletStream {
-    ArrayList<Bullet> bulletsList = new ArrayList<>();
-    public boolean canFire = true;
+    private ArrayList<Bullet> bulletsList = new ArrayList<>();
+    private boolean canFire = true;
+
+    public ArrayList<Bullet> getBulletStream() {
+        return bulletsList;
+    }
 
     public void fire(Ship ship) {
         if(canFire == true) {

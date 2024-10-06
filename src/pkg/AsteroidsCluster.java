@@ -4,41 +4,40 @@ import java.util.ArrayList;
 
 public class AsteroidsCluster {
     private final int MAX_ASTEROIDS = 10; //change back to 10
-    int asteroidsCount;
+    private int asteroidsCount;
 
-    ArrayList<Asteroids> asteroidsList = new ArrayList<>();
+    private ArrayList<Asteroids> asteroidsList = new ArrayList<>();
 
     public AsteroidsCluster() {
         asteroidsCount = 0;
     }
     public int updateAsteroids(BulletStream bullets) {
         int scoreUpdate = 0;
-        //update collision and reduction logic
         ArrayList<Asteroids> newAsteroids = new ArrayList<>();
 
-        for(int i = 0; i < bullets.bulletsList.size(); i++) {
-            Bullet bullet = bullets.bulletsList.get(i);
+        for(int i = 0; i < bullets.getBulletStream().size(); i++) {
+            Bullet bullet = bullets.getBulletStream().get(i);
             for(int j = 0; j < asteroidsList.size(); j++) {
                 Asteroids asteroid = asteroidsList.get(j);
                 if(bullet.asteroidHit(asteroid) == true) {
-                    bullets.bulletsList.remove(i);
+                    bullets.getBulletStream().remove(i);
                     i--;
                     if(asteroid.isAlive() == false) {
-                        scoreUpdate += asteroid.score;
-                        // if(asteroid.splitWithPhysics() == true) {
-                        //     for(int k = 0; k < 3; k++) {
-                        //         Asteroids copy = new Asteroids(asteroid, k+1, 1);
-                        //         newAsteroids.add(copy);
-                        //     }
-                        //     asteroidsCount += 3;
-                        // }
-                        if(asteroid.split() == true) {
+                        scoreUpdate += asteroid.getScore();
+                        if(asteroid.splitWithPhysics() == true) {
                             for(int k = 0; k < 3; k++) {
-                                Asteroids copy = new Asteroids(asteroid, k+1);
+                                Asteroids copy = new Asteroids(asteroid, k+1, 1);
                                 newAsteroids.add(copy);
                             }
                             asteroidsCount += 3;
                         }
+                        // if(asteroid.split() == true) {
+                        //     for(int k = 0; k < 3; k++) {
+                        //         Asteroids copy = new Asteroids(asteroid, k+1);
+                        //         newAsteroids.add(copy);
+                        //     }
+                        //     asteroidsCount += 3;
+                        // }
                         else {
                             asteroidsList.remove(j);
                             j--;
@@ -51,15 +50,15 @@ public class AsteroidsCluster {
         }
         asteroidsList.addAll(newAsteroids);
         // /* WITH CONSERVATION OF MOMENTUM AND KE */
-        // for(int i = 0; i < asteroidsList.size(); i++) {
-        //     for(int j = i + 1; j < asteroidsList.size(); j++) {
-        //         Asteroids asteroid1 = asteroidsList.get(i);
-        //         Asteroids asteroid2 = asteroidsList.get(j);
-        //         if(asteroidHit(asteroid1, asteroid2) == true) {
-        //             deflect(asteroid1, asteroid2);
-        //         }
-        //     }
-        // }
+        for(int i = 0; i < asteroidsList.size(); i++) {
+            for(int j = i + 1; j < asteroidsList.size(); j++) {
+                Asteroids asteroid1 = asteroidsList.get(i);
+                Asteroids asteroid2 = asteroidsList.get(j);
+                if(asteroidHit(asteroid1, asteroid2) == true) {
+                    deflect(asteroid1, asteroid2);
+                }
+            }
+        }
         if(asteroidsCount < MAX_ASTEROIDS) {
             Asteroids newAsteroid = new Asteroids();
             asteroidsList.add(newAsteroid);
@@ -68,10 +67,10 @@ public class AsteroidsCluster {
         return scoreUpdate;
     }
     public boolean asteroidHit(Asteroids asteroid1, Asteroids asteroid2) {
-        double dx = (asteroid1.x + asteroid1.diameter/2) - (asteroid2.x + asteroid2.diameter/2);
-        double dy = (asteroid1.y + asteroid1.diameter/2) - (asteroid2.y + asteroid2.diameter/2);
+        double dx = (asteroid1.getXCoordinate() + asteroid1.getDiameter()/2) - (asteroid2.getXCoordinate() + asteroid2.getDiameter()/2);
+        double dy = (asteroid1.getYCoordinate() + asteroid1.getDiameter()/2) - (asteroid2.getYCoordinate() + asteroid2.getDiameter()/2);
         double distance = (double) Math.sqrt((double) (dx * dx) + (double) (dy * dy));
-        if(distance <= (double) ((double) asteroid2.diameter/2 + (double) asteroid1.diameter/2)) {
+        if(distance <= (double) ((double) asteroid2.getDiameter()/2 + (double) asteroid1.getDiameter()/2)) {
             return true;
         }
         else return false;
@@ -91,18 +90,18 @@ public class AsteroidsCluster {
     }
 
     public void checkShipCollision(Ship ship) {
-        if(ship.canHit == false) {
+        if(ship.vulnerabilityStatus() == false) {
             return;
         }
         for(int i = 0; i < asteroidsList.size(); i++) {
             Asteroids asteroid = asteroidsList.get(i);
-            if(isShipCollision(ship, asteroid) == true && ship.canHit == true) {
+            if(isShipCollision(ship, asteroid) == true && ship.vulnerabilityStatus() == true) {
                 ship.loseHealth();
                 if(ship.isAlive() == true) {
                     ship.triggerInvulnerability();
                 }
                 else {
-                    ship.canHit = false;
+                    ship.toggleVulnerabilityStatus();
                     ship.deathSplit();
                 }
                 break;
@@ -112,23 +111,29 @@ public class AsteroidsCluster {
 
     public void deflect(Asteroids a1, Asteroids a2) {
         while(asteroidHit(a1, a2) == true) {
-            double dx = a2.getX() - a1.getX();
-            double dy = a2.getY() - a1.getY();
+            double dx = a2.getXCoordinate() - a1.getXCoordinate();
+            double dy = a2.getYCoordinate() - a1.getYCoordinate();
             double distance = Math.sqrt(dx * dx + dy * dy);
             double nx = dx / distance;
             double ny = dy / distance;
-            double v1n = a1.speedX * nx + a1.speedY * ny;
-            double v2n = a2.speedX * nx + a2.speedY * ny;
+            double a1SpeedX = a1.getSpeedX();
+            double a1SpeedY = a1.getSpeedY();
+            double a2SpeedX = a2.getSpeedX();
+            double a2SpeedY = a2.getSpeedY();
+            double v1n = a1SpeedX * nx + a1SpeedY * ny;
+            double v2n = a2SpeedX * nx + a2SpeedY * ny;
             double v1nAfter = v2n;
             double v2nAfter = v1n;
 
-            a1.speedX = v1nAfter * nx + (a1.speedX - v1n * nx);
-            a1.speedY = v1nAfter * ny + (a1.speedY - v1n * ny);
+            a1.setSpeedX(v1nAfter * nx + (a1SpeedX - v1n * nx));
+            a1.setSpeedY(v1nAfter * ny + (a1SpeedY - v1n * ny));
 
-            a2.speedX = v2nAfter * nx + (a2.speedX - v2n * nx);
-            a2.speedY = v2nAfter * ny + (a2.speedY - v2n * ny);
-            a1.move();
-            a2.move();
+            a2.setSpeedX(v2nAfter * nx + (a2SpeedX - v2n * nx));
+            a2.setSpeedY(v2nAfter * ny + (a2SpeedY - v2n * ny));
+            while(asteroidHit(a1, a2)) {
+                a1.move();
+                a2.move();
+            }
         }
     }
     //this is recomputed for the drawShip function, see if can overlay without stretching logic
@@ -144,7 +149,7 @@ public class AsteroidsCluster {
             (int) (ship.yCoordinate + ship.SHIP_WIDTH * Math.sin(Math.toRadians(ship.angle - 135)))
         };
 
-        return isCollision(xPoints, yPoints, 3, asteroid.x + asteroid.diameter/2, asteroid.y + asteroid.diameter/2, asteroid.diameter/2);
+        return isCollision(xPoints, yPoints, 3, asteroid.getXCoordinate() + asteroid.getDiameter()/2, asteroid.getYCoordinate() + asteroid.getDiameter()/2, asteroid.getDiameter()/2);
     }
 
     public boolean isCollision(int[] xPoints, int[] yPoints, int numPoints, double circleX, double circleY, double radius) {

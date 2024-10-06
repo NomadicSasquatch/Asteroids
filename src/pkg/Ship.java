@@ -11,7 +11,7 @@ public class Ship {
     HealthBar healthbar;
     ShipPieces deathShipPieces = new ShipPieces();
     int xCoordinate, yCoordinate, angle, speed, health;
-    boolean canHit = true;
+    private boolean canHit = true;
 
     private final int INVULNERABILITY_DURATION = 3000;
     private Timer invulnerabilityTimer;
@@ -95,5 +95,18 @@ public class Ship {
 
     public void deathSplit() {
         deathShipPieces.splitPieces(this);
+    }
+
+    public boolean vulnerabilityStatus() {
+        return canHit;
+    }
+
+    public void toggleVulnerabilityStatus() {
+        if(canHit == true) {
+            canHit = false;
+        }
+        else {
+            canHit = true;
+        }
     }
 }

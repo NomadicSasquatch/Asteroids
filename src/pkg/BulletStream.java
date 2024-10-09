@@ -19,6 +19,7 @@ public class BulletStream {
     public void moveBullets() {
         for(int i = 0; i < bulletsList.size(); i++) {
             Bullet bullet = bulletsList.get(i);
+            
             if(bullet.checkBoundary() == false) {
                 bulletsList.remove(i);
                 i--;

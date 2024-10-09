@@ -113,7 +113,7 @@ public class AsteroidsGame extends JPanel implements ActionListener, KeyListener
 
     public void update() {
         ship.moveShip();
-        score += cluster.updateAsteroids(bullets);
+        score += cluster.updateAsteroids(bullets, ship);
         cluster.moveAsteroids();
         cluster.checkShipCollision(ship);
         bullets.moveBullets();

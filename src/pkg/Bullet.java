@@ -10,12 +10,12 @@ public class Bullet {
     private double y;
     private double speedX;
     private double speedY;
-    private double diameter = 2;
+    private final double DIAMETER = 2;
 
     public Bullet(Ship ship) {
         this.SPEED = MAX_SPEED * 2; //make code cleaner here
-        this.x = ship.xCoordinate + (double) ship.SHIP_HEIGHT * Math.cos(Math.toRadians(ship.angle)) - diameter / 2;
-        this.y = ship.yCoordinate + (double) ship.SHIP_HEIGHT * Math.sin(Math.toRadians(ship.angle)) - diameter / 2; 
+        this.x = ship.xCoordinate + (double) ship.SHIP_HEIGHT * Math.cos(Math.toRadians(ship.angle)) - DIAMETER / 2;
+        this.y = ship.yCoordinate + (double) ship.SHIP_HEIGHT * Math.sin(Math.toRadians(ship.angle)) - DIAMETER / 2; 
         this.speedX = (double) (SPEED * (double) Math.cos(Math.toRadians(ship.angle)));
         this.speedY = (double) (SPEED * (double) Math.sin(Math.toRadians(ship.angle)));
     }
@@ -23,7 +23,6 @@ public class Bullet {
     public void moveBullet() {
         x += speedX;
         y += speedY;
-        //see if interpolation is needed (seems to slow things down drastically)
     }
 
     public boolean checkBoundary() {
@@ -33,17 +32,20 @@ public class Bullet {
 
     public void drawBullet(Graphics g) {
         g.setColor(Color.white);
-        g.fillOval((int) x, (int) y, (int) diameter, (int) diameter);
+        g.fillOval((int) x, (int) y, (int) DIAMETER, (int) DIAMETER);
     }
 
     public boolean asteroidHit(Asteroids asteroid) {
-        double dx = (asteroid.getXCoordinate() + asteroid.getDiameter()/2) - (this.x + this.diameter/2);
-        double dy = (asteroid.getYCoordinate() + asteroid.getDiameter()/2) - (this.y + this.diameter/2);
+        double dx = (asteroid.getXCoordinate() + asteroid.getDiameter()/2) - (this.x + this.DIAMETER/2);
+        double dy = (asteroid.getYCoordinate() + asteroid.getDiameter()/2) - (this.y + this.DIAMETER/2);
         double distance = (double) Math.sqrt((double) (dx * dx) + (double) (dy * dy));
-        if(distance <= (double) ((double) this.diameter/2 + (double) asteroid.getDiameter()/2)) {
+
+        if(distance <= (double) ((double) this.DIAMETER/2 + (double) asteroid.getDiameter()/2)) {
             asteroid.reduceHealth();;
             return true;
         }
-        else return false;
+        else {
+            return false;
+        }
     }
 }

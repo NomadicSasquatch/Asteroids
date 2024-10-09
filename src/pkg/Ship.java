@@ -8,9 +8,9 @@ import static pkg.Constants.*;
 
 public class Ship {
     public final int SHIP_WIDTH = 10, SHIP_HEIGHT = 20;
-    HealthBar healthbar;
+    private HealthBar healthbar;
     ShipPieces deathShipPieces = new ShipPieces();
-    int xCoordinate, yCoordinate, angle, speed, health;
+    protected int xCoordinate, yCoordinate, angle, speed, health;
     private boolean canHit = true;
 
     private final int INVULNERABILITY_DURATION = 3000;

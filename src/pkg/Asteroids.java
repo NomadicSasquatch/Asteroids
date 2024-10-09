@@ -25,7 +25,7 @@ public class Asteroids {
     private int health = 2;
     private int score = 100;
 
-    public Asteroids() {
+    public Asteroids(Ship ship) {
         Random random = new Random();
         int rand = (int)(Math.random() * RANDOM_ASTEROID_INT_RANGE);
         if(rand <= 150 && rand > 140) this.mult = 8;
@@ -34,8 +34,8 @@ public class Asteroids {
         else this.mult = 1;
         // this.mult = 14;
 
-        this.xCoordinate = /*400;*/(int)(Math.random() * 600); //can remove this
-        this.yCoordinate = /*300;*/ (int)(Math.random() * 900);
+        this.xCoordinate = ship.xCoordinate + (int)(Math.random() * 600) + 200;
+        this.yCoordinate = ship.yCoordinate + (int)(Math.random() * 900) + 200;
         // this.xCoordinate = 600;
         // this.yCoordinate = 300;
         this.diameter *= this.mult;

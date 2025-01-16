@@ -20,7 +20,7 @@ This project puts a twist on the classic arcade-style Asteroids Game where playe
 ## Installation
 - Clone the repository: git clone <repository-url>
 - Open the project in your preferred IDE
-- Ensure the necessary assets (e.g., asteroid image and custom font) are available in the specified file paths
+- Ensure the necessary assets (e.g., asteroid image and custom font) are available
 
 ## How to Play
 - Run the Main.java file to start the game

@@ -203,7 +203,7 @@ public class AsteroidsGame extends JPanel implements ActionListener, KeyListener
         endMessageLabel = new JLabel("", SwingConstants.CENTER);
 
         try {
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("C:\\Users\\deez nuts\\Downloads\\xinyi (1).ttf")).deriveFont(24f);
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("insert your path to unique font sheet")).deriveFont(24f);
             endMessageLabel.setFont(customFont);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();

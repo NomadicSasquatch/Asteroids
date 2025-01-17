@@ -47,7 +47,7 @@ public class Asteroids {
         this.speedY = SPEED * Math.sin(direction);
 
         try {
-            asteroidImage = ImageIO.read(new File("C:\\Users\\deez nuts\\OneDrive\\Pictures\\Asteroid_Sprite(1).png"));
+            asteroidImage = ImageIO.read(new File("insert your pathname to asteroid sprite here"));
         } catch (IOException e) {
             e.printStackTrace();
         }

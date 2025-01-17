@@ -24,20 +24,20 @@ public class AsteroidsCluster {
                     i--;
                     if(asteroid.isAlive() == false) {
                         scoreUpdate += asteroid.getScore();
-                        // if(asteroid.splitWithPhysics() == true) {
-                        //     for(int k = 0; k < 3; k++) {
-                        //         Asteroids copy = new Asteroids(asteroid, k+1, 1);
-                        //         newAsteroids.add(copy);
-                        //     }
-                        //     asteroidsCount += 3;
-                        // }
-                        if(asteroid.split() == true) {
+                        if(asteroid.splitWithPhysics() == true) {
                             for(int k = 0; k < 3; k++) {
-                                Asteroids copy = new Asteroids(asteroid, k+1);
+                                Asteroids copy = new Asteroids(asteroid, k+1, 1);
                                 newAsteroids.add(copy);
                             }
                             asteroidsCount += 3;
                         }
+                        // if(asteroid.split() == true) {
+                        //     for(int k = 0; k < 3; k++) {
+                        //         Asteroids copy = new Asteroids(asteroid, k+1);
+                        //         newAsteroids.add(copy);
+                        //     }
+                        //     asteroidsCount += 3;
+                        // }
                         else {
                             asteroidsList.remove(j);
                             j--;
@@ -50,15 +50,15 @@ public class AsteroidsCluster {
         }
         asteroidsList.addAll(newAsteroids);
         // /* WITH CONSERVATION OF MOMENTUM AND KE */
-        // for(int i = 0; i < asteroidsList.size(); i++) {
-        //     for(int j = i + 1; j < asteroidsList.size(); j++) {
-        //         Asteroids asteroid1 = asteroidsList.get(i);
-        //         Asteroids asteroid2 = asteroidsList.get(j);
-        //         if(asteroidHit(asteroid1, asteroid2) == true) {
-        //             deflect(asteroid1, asteroid2);
-        //         }
-        //     }
-        // }
+        for(int i = 0; i < asteroidsList.size(); i++) {
+            for(int j = i + 1; j < asteroidsList.size(); j++) {
+                Asteroids asteroid1 = asteroidsList.get(i);
+                Asteroids asteroid2 = asteroidsList.get(j);
+                if(asteroidHit(asteroid1, asteroid2) == true) {
+                    deflect(asteroid1, asteroid2);
+                }
+            }
+        }
         if(asteroidsCount < MAX_ASTEROIDS) {
             Asteroids newAsteroid = new Asteroids(ship);
             asteroidsList.add(newAsteroid);

@@ -1,6 +1,10 @@
 # Physics Simulated Atari Asteroid Game
 This project puts a twist on the classic arcade-style Asteroids Game where players navigate a spaceship, destroy asteroids, and strive for a high score. The game is implemented in Java and every interaction is simulated by real physics laws and theorems, such as asteroid collisions obeying conservation of energy and momentum and kinematics.
 
+![image](https://github.com/user-attachments/assets/f429ec3a-dcb8-4b0b-a566-8209673d4eed)
+
+
+
 ## Features
 - Responsive Controls: Use keyboard inputs to navigate the ship, fire bullets, and dodge asteroids
 - Dynamic Gameplay: Procedurally generated asteroids with varying sizes and speeds
@@ -25,10 +29,10 @@ This project puts a twist on the classic arcade-style Asteroids Game where playe
 ## How to Play
 - Run the Main.java file to start the game
 - Control your ship using:
-W: Move forward
-A/D: Rotate left/right
-S: Move backward
-Space: Fire bullets
+  - W: Move forward
+  - A/D: Rotate left/right
+  - S: Move backward
+  - Space: Fire bullets
 - Avoid collisions with asteroids to survive
 - Destroy asteroids to gain points
 - Survive as long as possible and achieve a high score!

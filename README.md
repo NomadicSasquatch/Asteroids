@@ -1,5 +1,5 @@
 # Physics Simulated Atari Asteroid Game
-This project puts a twist on the classic arcade-style Asteroids Game where players navigate a spaceship, destroy asteroids, and strive for a high score. The game is implemented in Java and every interaction is simulated by real physics laws and theorems, such as asteroid collisions obeying conservation of energy and momentum and kinematics.
+This project puts a twist on the classic arcade-style Asteroids Game where players navigate a spaceship, destroy asteroids, and strive for a high score. The game is implemented in Java and every interaction is simulated by physics laws and theorems, such as asteroid collisions obeying conservation of energy and momentum and kinematics.
 
 
 
@@ -24,9 +24,13 @@ This project puts a twist on the classic arcade-style Asteroids Game where playe
 - Java Swing library (included with JDK)
 
 ## Installation
-- Clone the repository: git clone <repository-url>
+- Clone the repository
+  ```
+  git clone https://github.com/NomadicSasquatch/Asteroids.git
+  cd Asteroids
+  ```
 - Open the project in your preferred IDE
-- Ensure the necessary assets (e.g., asteroid image and custom font) are available
+- Ensure the necessary assets (asteroid sprite and custom font) are available
 
 ## How to Play
 - Run the Main.java file to start the game

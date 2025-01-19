@@ -8,12 +8,13 @@ This project puts a twist on the classic arcade-style Asteroids Game where playe
 - Responsive Controls: Use keyboard inputs to navigate the ship, fire bullets, and dodge asteroids
 - Dynamic Gameplay: Procedurally generated asteroids with varying sizes and speeds
 - Collision Mechanics: Realistic collision detection between the ship, bullets, and asteroids
-![2025-01-1716-35-50-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/a1902527-19e4-4118-850e-f802de633e54)
+![2025-01-1914-06-44-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/fb467c63-26b1-47a1-9e0c-16f2292dcc78)
 - Score Tracking: Real-time score updates based on asteroid destruction
 - Health System: Visual health bar and invulnerability period upon collision
 - Asteroid Splitting: Larger asteroids split into smaller fragments when destroyed
 - Game Over Handling: Display of final score with an end-game message
 ![2025-01-1716-30-45-ezgif com-video-to-gif-converter (1)](https://github.com/user-attachments/assets/4c5b3412-9914-4fab-b37c-0e1192322f12)
+
 
 
 ## Getting Started
